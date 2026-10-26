@@ -1,0 +1,8 @@
+{
+  "stable_salaried": {"label":"Stable salaried", "name":"Aarav Mehta", "profile_type":"salaried", "age":32, "monthly_inflow":72000, "inflow_variability":0.08, "active_months":18, "existing_emi":8000},
+  "irregular_gig": {"label":"Irregular gig worker", "name":"Nisha Verma", "profile_type":"gig", "age":29, "monthly_inflow":48000, "inflow_variability":0.52, "active_months":14, "existing_emi":7000},
+  "short_history": {"label":"New account, short history", "name":"Kabir Shah", "profile_type":"new_to_credit", "age":24, "monthly_inflow":56000, "inflow_variability":0.15, "active_months":3, "existing_emi":0},
+  "high_emi": {"label":"High existing EMI", "name":"Meera Iyer", "profile_type":"high_emi", "age":38, "monthly_inflow":68000, "inflow_variability":0.12, "active_months":24, "existing_emi":35000},
+  "borderline": {"label":"Borderline affordability", "name":"Dev Singh", "profile_type":"borderline", "age":42, "monthly_inflow":51000, "inflow_variability":0.24, "active_months":8, "existing_emi":17000}
+}
+

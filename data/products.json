@@ -1,0 +1,18 @@
+{
+  "demo_only": true,
+  "loan": {
+    "name": "Sahay Sample Personal Loan",
+    "interest_rate_annual_percent": 18,
+    "processing_fee_inr": 999,
+    "max_tenure_months": 36,
+    "eligibility_rule": "Illustrative only: declared monthly income should be at least 3 times the estimated EMI.",
+    "disclosure": "Fictional demo terms. Not a Paytm or lender offer. Fees and taxes may change the actual cost."
+  },
+  "insurance": {
+    "name": "Sample SecureLife Term Cover",
+    "sum_assured_inr": 2500000,
+    "annual_premium_inr": 4800,
+    "exclusions": ["Suicide exclusion applies in the first policy year, subject to the policy wording.", "Pre-existing conditions may have waiting periods or exclusions as stated in the issued policy."],
+    "disclosure": "Fictional demo product. Always use the issued policy wording for decisions."
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "sahay-financial-copilot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Voice-first financial journey copilot demo for the Paytm hackathon",
+  "scripts": { "start": "python server.py" }
+}

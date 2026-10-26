@@ -1,0 +1,10 @@
+services:
+  sahay:
+    build: .
+    ports:
+      - "4173:4173"
+    volumes:
+      - sahay_data:/app/data
+    restart: unless-stopped
+volumes:
+  sahay_data:

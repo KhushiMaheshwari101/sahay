@@ -1,0 +1,3 @@
+{"name":"Aarav Mehta","kind":"clear","expected_quality":"pass","notes":"Synthetic profile only; never use real identity documents."}
+{"name":"Nisha Verma","kind":"blurry","expected_quality":"retry","notes":"Synthetic profile only; never use real identity documents."}
+{"name":"Kabir Shah","kind":"name_mismatch","expected_quality":"retry","notes":"Synthetic profile only; never use real identity documents."}

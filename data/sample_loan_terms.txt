@@ -1,0 +1,11 @@
+# Demo personal loan product terms
+
+Product name: Sahay Sample Personal Loan
+
+This is fictional hackathon demo content. It is not an offer from Paytm or any lender.
+
+- Sample annual interest rate: 18% reducing balance
+- Sample processing fee: ₹999, before taxes
+- Sample maximum tenure: 36 months
+- Illustrative affordability rule: monthly income at least 3 times estimated EMI
+- No credit bureau check, identity verification, approval, disbursal or mandate setup occurs in this demo

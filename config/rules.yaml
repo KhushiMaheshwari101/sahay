@@ -1,0 +1,14 @@
+version: rules_v1.2
+minimum_age: 21
+maximum_age: 60
+minimum_active_months: 6
+foir_cap: 0.50
+max_income_multiple: 4.0
+stable_variability_max: 0.20
+borderline_variability_max: 0.35
+interest_rate_tiers:
+  stable: 16.5
+  standard: 18.0
+  borderline: 21.0
+processing_fee: 999
+max_tenure_months: 36
