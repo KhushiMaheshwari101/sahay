@@ -5,9 +5,9 @@
 
 ## Results
 
-- **37 unit tests passed** across parsing, eligibility, consent, document checks, handoff, finance, API input validation and the complete mock journey.
+- **39 unit tests passed** across parsing, eligibility, consent, document checks, handoff, finance, API input validation and the complete mock journey.
 - **42/42 golden conversation cases passed** for loan amount phrasing, ambiguous requests, amount boundaries, scam/OTP safety prompts and human handoff language.
-- Python compile check passed: `python -m compileall -q backend server.py evals tests`.
+- Python compile check passed: `python -m compileall -q backend server.py` (the full `evals` and `tests` packages are exercised by their own commands).
 - Frontend JavaScript syntax check passed: `node --check src/app.js`.
 
 ## Bugs found and fixed during the audit
@@ -34,7 +34,7 @@
 - Browser-driven end-to-end interaction and visual rendering: local socket access is restricted here, so the app could not be opened against its local server from this test environment.
 - Actual speech recognition/synthesis: depends on the user's browser and microphone permissions.
 - Actual Tesseract OCR: requires a separately installed Tesseract binary; tests use controlled OCR text and mocked image metrics.
-- Optional OpenAI wording mode: no live API call was made. It remains disabled by default and has only deterministic unit-level coverage.
+- Optional OpenAI wording mode: configuration is present in the local `.env`, but no live API call was made. The `.env.example` template keeps it disabled by default; unit tests cover deterministic safety/fallback behavior only.
 - Paytm/UPI, bureau, lender underwriting, regulated KYC, disbursal, bank mandate and live human support: these are not connected in this MVP.
 - Production security, load, concurrency and lender-policy validation: outside the local demo test scope.
 
@@ -51,7 +51,7 @@ python -m compileall -q backend server.py evals tests
 
 | Build-plan item | Current status |
 |---|---|
-| Chat + speech | Chat streams over SSE. Browser speech is the default. Optional Sarvam STT/TTS and OpenAI transcription adapters are consent-gated and disabled until configured; no live provider call was made. |
+| Chat + speech | Chat streams over SSE. Browser speech is the default. Optional Sarvam STT/TTS and OpenAI transcription adapters are consent-gated. The local `.env` is configured for Sarvam speech and OpenAI wording, but provider credentials have not been authenticated with a live call. |
 | Rules + mock data | Implemented with deterministic YAML rules, reason codes, and five synthetic profiles. |
 | Documents | Image quality checks, text-based PDF extraction, masked PAN/Aadhaar-format IDs, Verhoeff checksum, masked DOB and name matching. Scanned-policy OCR, Aadhaar identity verification and real KYC remain absent. |
 | RAG and policy explanation | Local TF-IDF retrieval over sample loan/policy text and in-memory uploaded PDFs, with source labels. No embeddings/vector DB or approved real policy corpus. |

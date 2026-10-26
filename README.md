@@ -9,7 +9,13 @@ A local-first hackathon MVP for **“Make Insurance, Lending and Fintech simpler
 3. Start the server: `python server.py` (or `npm start` if Node.js is installed).
 4. Open `http://127.0.0.1:4173`.
 
-The app uses local SQLite and FastAPI/Pydantic. By default it needs no account, API key or model service. Chat can stream over SSE; request IDs, input schemas and loopback rate limits are enabled in the local API. An optional OpenAI Responses adapter can rewrite deterministic replies when `ENABLE_LLM=true`, `OPENAI_API_KEY` and `OPENAI_MODEL` are configured in a local `.env` copied from `.env.example`. The adapter receives only approved response facts and language, never the raw user transcript; financial decisions remain in deterministic rules. Browser speech recognition and speech synthesis are the no-key fallback. Optional Sarvam STT/TTS or OpenAI transcription requires provider configuration in `.env` and an explicit per-session audio consent. No live provider call has been verified. The app has a local Docker path too: `docker compose up --build`.
+## Optional API keys
+
+The demo works without API keys. To enable the optional OpenAI wording assistant locally, copy `.env.example` to `.env` in the project root, then set `OPENAI_API_KEY`, `OPENAI_MODEL` (default example: `gpt-4.1-mini`) and `ENABLE_LLM=true`. The OpenAI adapter only rewrites approved deterministic replies; it does not decide eligibility, approve loans or receive the raw user transcript. If the provider fails or returns unsafe/changed financial numbers, the app falls back to its deterministic reply.
+
+For dedicated speech services, set `SPEECH_PROVIDER=sarvam` and `SARVAM_API_KEY` for Sarvam speech, or `SPEECH_PROVIDER=openai` and `OPENAI_API_KEY` for OpenAI transcription. Browser speech is the no-key default. External audio is sent only after the user explicitly grants voice consent in the app. Never put real keys in `.env.example`, source code or GitHub; `.env` is ignored by Git. On a hosting platform, add the same values in its Environment Variables/Secrets settings and redeploy. Live provider calls have not been verified in this demo.
+
+The app uses local SQLite and FastAPI/Pydantic. Chat can stream over SSE; request IDs, input schemas and loopback rate limits are enabled in the local API. The app has a local Docker path too: `docker compose up --build`.
 
 ## Implemented MVP flow
 
@@ -60,4 +66,3 @@ The test suite covers EMI, eligibility tiers, consent, document retry/matching a
 - Pitch deck: create after the repository and live demo URLs exist
 
 See [EVALUATION.md](EVALUATION.md) for edge-case coverage, fixes and validation limits.
-
