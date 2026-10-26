@@ -48,13 +48,24 @@ class HandoffUpdate(StrictModel): status: Literal["OPEN","IN_PROGRESS","RESOLVED
 class VoiceBody(StrictModel): session_id: str=Field(min_length=1,max_length=32); consent: StrictBool
 class SpeechBody(VoiceBody): text: str=Field(min_length=1,max_length=2400); language: Literal["English","Hinglish","Hindi","Punjabi","Tamil"]="Hindi"
 
+def allowed_hostnames():
+    if os.getenv("RENDER")=="true":
+        hosts=set()
+        render_host=os.getenv("RENDER_EXTERNAL_HOSTNAME","").strip().lower()
+        if render_host: hosts.add(render_host)
+    else:
+        hosts={"127.0.0.1","localhost","testserver"}
+    hosts.update(value.strip().lower() for value in os.getenv("SAHAY_ALLOWED_HOSTS","").split(",") if value.strip())
+    return hosts
+
 @app.middleware("http")
 async def request_controls(request:Request,call_next):
-    host=request.url.hostname or ""
-    if host not in ("127.0.0.1","localhost","testserver"):
-        return JSONResponse(status_code=403,content={"error":"The demo API only accepts loopback requests."})
+    allowed=allowed_hostnames()
+    host=(request.url.hostname or "").lower()
+    if host not in allowed:
+        return JSONResponse(status_code=403,content={"error":"This host is not on the demo allow-list."})
     origin=request.headers.get("origin")
-    if origin and (origin_host:=__import__("urllib.parse",fromlist=["urlparse"]).urlparse(origin).hostname) not in ("127.0.0.1","localhost"):
+    if origin and (origin_host:=__import__("urllib.parse",fromlist=["urlparse"]).urlparse(origin).hostname or "").lower() not in allowed:
         return JSONResponse(status_code=403,content={"error":"Cross-origin requests are disabled."})
     try:
         length=int(request.headers.get("content-length","0"))

@@ -153,9 +153,10 @@ class Handler(SimpleHTTPRequestHandler):
 
 if __name__=="__main__":
     import uvicorn
-    host=os.getenv("SAHAY_HOST","127.0.0.1")
-    print(f"Sahay local demo at http://127.0.0.1:4173 (bind={host})")
-    uvicorn.run("backend.api:app",host=host,port=4173,log_level="warning")
+    host=os.getenv("SAHAY_HOST","0.0.0.0" if os.getenv("RENDER")=="true" else "127.0.0.1")
+    port=int(os.getenv("PORT","4173"))
+    print(f"Sahay demo listening on {host}:{port}")
+    uvicorn.run("backend.api:app",host=host,port=port,log_level="warning")
 
 
 

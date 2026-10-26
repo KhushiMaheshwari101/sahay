@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: sahay
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py
+    healthCheckPath: /api/health
+    envVars:
+      - key: ENABLE_LLM
+        value: "false"
+      - key: OPENAI_MODEL
+        value: gpt-4.1-mini
+      - key: SPEECH_PROVIDER
+        value: browser
+      - key: OPENAI_STT_MODEL
+        value: gpt-transcribe

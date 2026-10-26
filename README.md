@@ -17,6 +17,14 @@ For dedicated speech services, set `SPEECH_PROVIDER=sarvam` and `SARVAM_API_KEY`
 
 The app uses local SQLite and FastAPI/Pydantic. Chat can stream over SSE; request IDs, input schemas and loopback rate limits are enabled in the local API. The app has a local Docker path too: `docker compose up --build`.
 
+## Deploy to Render
+
+This repository includes `render.yaml` for a Render Blueprint deployment. Push the repository to GitHub, then in Render choose **New + → Blueprint**, connect the `sahay` repository, review the `sahay` web service, and deploy. Render supplies `PORT` and `RENDER_EXTERNAL_HOSTNAME`; the server binds to `0.0.0.0:$PORT` and allows that exact Render hostname.
+
+To enable live providers, open the service's **Environment** settings and add secrets there (never commit `.env`): `SARVAM_API_KEY` and `SPEECH_PROVIDER=sarvam` for Sarvam speech; `OPENAI_API_KEY`, `OPENAI_MODEL=gpt-4.1-mini`, and `ENABLE_LLM=true` for optional OpenAI wording. Save changes and redeploy. Without these secrets, the browser speech and deterministic replies remain available.
+
+The demo stores session data in local SQLite. Render's default filesystem is ephemeral, so demo sessions/analytics can reset after redeploy or instance restart. Do not use real customer identity or financial data.
+
 ## Implemented MVP flow
 
 - **Intent:** enter a requested amount and select one of five fictional UPI profiles.
