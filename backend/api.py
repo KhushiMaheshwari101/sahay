@@ -113,6 +113,7 @@ def public_profiles():
     return [{"id":k,"label":p["label"],"name":p["name"],"type":p["profile_type"],"age":p["age"],"monthly_inflow":p["monthly_inflow"],"variability":p["inflow_variability"],"active_months":p["active_months"],"existing_emi":p["existing_emi"],"monthly_inflows":generate_monthly_inflows(k),"disclosure":"Synthetic demo UPI profile"} for k,p in PROFILES.items()]
 
 @app.get("/")
+@app.head("/")
 def home(): return FileResponse(ROOT/"index.html")
 @app.get("/index.html")
 def index(): return FileResponse(ROOT/"index.html")
@@ -121,6 +122,7 @@ def app_js(): return FileResponse(ROOT/"src/app.js",media_type="text/javascript"
 @app.get("/src/styles.css")
 def styles(): return FileResponse(ROOT/"src/styles.css",media_type="text/css")
 @app.get("/api/health")
+@app.head("/api/health")
 def health(): return {"ok":True,"service":"sahay-local-demo","rules_version":RULES["version"],"demo_only":True,"llm_enabled":llm_configured(),"speech_provider":speech_provider(),"speech_external_enabled":speech_configured()}
 @app.get("/api/profiles")
 def profiles(): return {"profiles":public_profiles(),"synthetic":True}

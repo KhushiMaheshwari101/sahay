@@ -203,6 +203,16 @@ class ProjectTest(unittest.TestCase):
         response=client.get("/api/health")
         self.assertEqual(response.status_code,200)
 
+    def test_uptime_monitor_head_checks(self):
+        from fastapi.testclient import TestClient
+        from backend.api import app
+        client=TestClient(app)
+        for path in ("/", "/api/health"):
+            with self.subTest(path=path):
+                response=client.head(path)
+                self.assertEqual(response.status_code,200)
+                self.assertEqual(response.content,b"")
+
     def test_document_upload_rejects_unsupported_format_before_decode(self):
         sid,_=self.to_kyc()
         for filename,content_type in (("fake.svg","image/svg+xml"),("fake.gif","image/gif"),("fake.png","text/plain")):
